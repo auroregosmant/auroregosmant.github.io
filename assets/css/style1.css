@@ -256,7 +256,7 @@ section {
   left: 50%;
   transform: translateX(-50%);
   font-size: 24px;
-  background: #B87A87;
+  background: rgb(210,122,135);;
   padding: 12px;
   color: #fff;
   border-radius: 50px;
@@ -317,7 +317,7 @@ section {
 			}
 
 			ul.feature-icons li:before {
-				background: #B87A87;
+				background: rgb(210,122,135);;
 				border-radius: 100%;
 				color: #ffffff;
 				display: block;

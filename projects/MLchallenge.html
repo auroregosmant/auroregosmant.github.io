@@ -98,16 +98,60 @@
             <li>Columns 27 - 37 : 11 matching scores between the two images.</li>
             <li>Column 38 : Labelled pair of images :  <b>1</b> if a pair of images belong to the same person, <b>0</b> otherwise.</li>
         </ul>
+        <p>
         <br>
         <br>
+        <b>Data Distribution</b>
+        <br>
+        <br>
+        To better understand the data, let's have a look at how it is distributed. To do so, we concatenate the training set and the test set, and compare the distribution of each of the 13 features between first image and second image.
+      </p>
+      <img src = "mlproj1.PNG" width = 50%>
+      <img src = "mlproj2.PNG" width = 50%>
+
+      <p>We deduce from these plots that both of these images have the same distribution for qs ans qr, which means that the same calculation was used to evaluates features of image 1 and image 2.
+
+        From this, we can conclude that :
+      </p>
+        <ul style = "margin: 0.5% 10%" type="disc">
+            <li>The data is symmetric with respect to image features qs and qr, which is very important.</li>
+            <li>Each image can be identified uniquely thanks to its vector of features.</li>
+        </ul>
+        <br>
+        <p>
+        Besides, to be able to identify pairs, the best would be that the matching scores sr have a different distribution regarding the value y. If for a feature s, the distribution of s given that y = 0 is well separated from the the distribution of s given that y = 1, then it means that the matching score is good at making the difference between matched pairs and mismatched pairs.
+      </p>
+
+      <img src = "mlproj3.PNG" width = 50%>
+      <p>
+      According to these plots, we notice that the matching scores all follow about the same distribution. Thus, as expected, the distribution given y=0 is well separated from the distribution given y=1, which enables us to conclude that matching scores are well are good at differentiating matching pairs of mismatching pairs.
+      <br>
+      <br>
+      <b> Feature Selection </b>
+      <br>
+      <br>
+      Another criteria to take into account is feature selection. Let's identify the subset of features that have the most important role in differentiating a mismatching pair of a matching pair of images. Because we use an embedded method, the feature selection is dependant on the classifier used to build our prediction model. Because we chose XGBboost as classifier, we then select our features according to it
+      </p>
+      <img src="mlproj4.PNG" width = 50%>
+      <p>
+        We notice somthing quite unexpected here. We could have expected all matching scores s1 to s11 to have the highest important in identifying matching pairs, but the only features s11, s4, s10, s9, s5 and s7 have the greatest importance, and some qr and qs features have higher importance than the rest of the matching scores.
+
+        Besides, we also notice that in the ranking, features qr is often close to its analogous qs, from which we wan deduce that the single feature of an image doesn't yield much information on the output, since it has to be comapred to the quality of the second image.
+        <br>
+        <br>
+
+      </p>
+
+
+
 
         <h2 > Perfomance criterion </h2>
         <br>
         <p>
           <b>Prediction accuracy</b> on the test set was the metric used to evaluate the performance of our model. This value was between 0 and 1 and the higher the better.
-          This performance criterion was imposed by our professors, and could be used in this binary classication problem since data was quite
-          balanced.
+          This performance criterion was imposed by our professors, even though in our binary classication problem, data was imbalanced, with much more mismatching pairs than matching pairs. Our problem can be compared to fraud detection, where only a few numbers of frauds are identified compared to the number of valid transactions. We will take into consideration this information to choose and tune the classifier we will use.
         </p>
+        <img src="mlproj5.PNG" width = 50%>
 
         <br>
         <br>
@@ -118,7 +162,7 @@
           We ranked 8th out of 126 participants with an accuracy of 99.8665% on the test set.
         </p>
         <ol style = "margin: 0.5% 10%" start="1">
-         <li> We used a Yeo-Johnson transformation to reduce the skweness in some of the features</li>
+         <li> We reduced the skweness in some of the features.</li>
          <li> We doubled the number of train data by symmetrizing the train set : for each row, we added the same row with the first image and the second image switched.</li>
          <li> We used sklearn's RandomizedSearchCV for parameter tuning on XGBoost.</li>
          <li> We trained a first XGBoost classifier and used it to predict the probabilies of each label (0 or 1) on the test data. </li>

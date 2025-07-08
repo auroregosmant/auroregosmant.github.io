@@ -43,7 +43,7 @@
 
 	/* Text Carousel */
 	#text-carousel-intro-section .caption h1 {
-		font-size: 50px;
+		font-size: 120px;
 	}
 
 	/* Team */
@@ -117,10 +117,10 @@
 		top: 50% !important; /* Removes parallax on caption */
 	}
 	#text-carousel-intro-section .caption h1 {
-		font-size: 34px;
+		font-size: 80;
 	}
 	#text-carousel-intro-section .caption h3 {
-		font-size: 12px;
+		font-size: 30px;
 	}
 
 	/* Error section caption */
@@ -202,10 +202,10 @@
 
 	/* Navbar shrink toggle button */
 	.navbar-shrink .navbar-toggle .icon-bar {
-		background-color: #FFF !important;
+		background-color: #000 !important;
 	}
 	.navbar-inverse.navbar-shrink .navbar-toggle .icon-bar {
-		background-color: #FFF !important;
+		background-color: #000 !important;
 	}
 
 	/* Page */
